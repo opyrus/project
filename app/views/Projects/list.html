@@ -1,0 +1,24 @@
+#{extends 'main.html' /}
+#{set title:'Projects' /}
+#{set detail:'Simple Projects Application by Play Framework with Bootstrap 3' /}
+<div class="row">
+ <div class="col-xs-12"> #{a @Projects.create(), class:'btn btn-success'}Let's create a new project#{/a}</div>
+</div>
+<div class="row">
+ <div class="col-xs-12">
+ #{list items:projects, as:'project'}
+ <div class="col-lg-4" style="padding: 0;">
+ <div class="materialCard success">
+ <header>
+ #{a @Tasks.list(project.projectId), class : 'btn btn-success'}
+ ${project.projectName}
+ <span class="badge">${project.checkedTask}/${project.allTask}</span>
+ #{/a}
+ </header>
+#{a @Projects.edit(project.projectId)}Edit#{/a}
+#{a @Projects.delete(project.projectId), onclick : 'return confirm(\'Delete this project ?\');'}Delete#{/a}
+ </div>
+ </div>
+ #{/list}
+ </div>
+</div>

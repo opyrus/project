@@ -1,0 +1,59 @@
+#{extends 'main.html' /}
+#{set title: project.projectName /}
+#{set detail: '' /}
+#{set 'moreScripts'}
+<script type="text/javascript">
+ $(document).ready(function(){
+ $('.taskStatus').on('click',function(){
+ var status = '';
+ if ($(this).is(':checked')) {status = 'checked';}
+ $.get("@{Tasks.edit()}", {
+ projectId: '${project.projectId}',
+ taskId: $(this).attr('task-id') ,
+ status: status }
+ );
+ });
+ });
+</script>
+#{/set}
+
+<div class="row">
+ <div class="col-xs-12">
+ <div class="box effect1">
+ <h4>All tasks of #{get 'title'/}</h4>
+ <div class="table-responsive">
+ <table class="table">
+ #{list items:tasks, as:'task'}
+ <tr>
+ <td class="col-lg-2" style="text-align: right"><input type="checkbox" class="taskStatus" task-id="${task.taskId}" ${task.status} /></td>
+ <td class="col-lg-8">${task.task}</td>
+<td class="col-lg-2">#{a @Tasks.delete(task.projectId, task.taskId), onclick : 'return confirm(\'Delete this task ?\');'}Delete#{/a}</td>
+
+ </tr>
+ #{/list}
+ </table>
+ </div>
+ </div>
+ </div>
+</div>
+<div class="row">
+ <div class="col-xs-12">
+ <div class="box effect1">
+ <h4>Add a new task for #{get 'title'/}</h4>
+#{form @Tasks.create(), class:'form-horizontal'}
+ <input type="text" name="projectId" value="${project.projectId}" hidden/>
+ <div class="form-group">
+ <label for="newTask" class="col-lg-2 control-label">New task:</label>
+ <div class="col-lg-10"><input class="form-control" id="newTask" type="text" name="newTask" /></div>
+ </div>
+ <div class="form-group">
+ <div class="col-lg-offset-2 col-lg-10">
+ <button type="submit" class="btn btn-success">Create a new task</button>
+ <button type="reset" class="btn btn-danger">Reset</button>
+ #{a @Projects.index(), class: "btn btn-primary"}Back to Home#{/a}
+ </div>
+ </div>
+ #{/form}
+ </div>
+ </div>
+</div> 

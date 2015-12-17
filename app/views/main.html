@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <title>INDIVILISTER : #{get 'title' /}</title>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ #{stylesheet 'bootstrap.min.css'/}
+ #{stylesheet 'custom.css'/}
+ #{get 'moreStyles' /}
+ <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.ico'}">
+ </head>
+ <body>
+ <main>
+ <!-- START Navigation bar -->
+ <nav class="navbar navbar-default">
+ <div class="container">
+ <div class="navbar-header">
+ <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+ <span class="sr-only">Toggle navigation</span>
+ <span class="icon-bar"></span>
+ <span class="icon-bar"></span>
+ <span class="icon-bar"></span>
+ </button>
+ <a class="navbar-brand" href="/">INDIVILISTER</a>
+ </div>
+<div class="collapse navbar-collapse" id="navbar-collapse">
+ <ul class="nav navbar-nav">
+ <li class="dropdown">
+ <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Project <span class="caret">
+</span></a>
+ <ul class="dropdown-menu">
+ <li>#{a @Projects.list()}List project#{/a}</li>
+ <li>#{a @Projects.create()}Create a new project#{/a}</li>
+ </ul>
+ </li>
+ </ul>
+ </div>
+ </div>
+ </nav>
+ <!-- END Navigation bar -->
+ <!-- START Header -->
+ <div class="header-custom">
+ <div class="container">
+ <h2>#{get 'title' /}</h2>
+ <p>#{get 'detail' /}</p>
+ </div>
+ </div>
+ <!-- END Header -->
+ 
+ <!-- START Content -->
+ <div class="container">
+ #{doLayout /}
+ </div>
+ <!-- END Content -->
+ 
+ <div class="push"></div>
+ </main>
+ 
+ <!-- START Footer -->
+ <footer>
+ <span>Powered by ARMS with <img src="@{'/public/images/play_logo.png'}" height="30"/> Framework and Bootstrap 3</span>
+ </footer>
+ <!-- START Footer -->
+
+ </body>
+</html>
+#{script 'jquery-1.11.3.min.js', charset:'utf-8' /}
+#{script 'bootstrap.min.js', charset:'utf-8' /}
+#{get 'moreScripts' /}
